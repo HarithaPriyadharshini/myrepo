@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Azure Blob Upload</title>
+  </head>
+  <body>
+    <h1>Upload a file to Azure Blob Storage</h1>
+
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+      {% for m in messages %}
+      <li>{{ m }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <form
+      action="{{ url_for('upload') }}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <input type="file" name="file" required />
+      <input type="submit" value="Upload" />
+    </form>
+
+    <h2>Files in container</h2>
+    <ul>
+      {% for blob in blobs %}
+      <li>
+        {{ blob }} -
+        <a href="{{ url_for('download', blob_name=blob) }}">Download</a> -
+        <a href="{{ url_for('stream_download', blob_name=blob) }}"
+          >Stream Download</a
+        >
+      </li>
+      {% else %}
+      <li>No files uploaded yet.</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
