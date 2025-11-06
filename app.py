@@ -8,9 +8,8 @@ app = Flask(__name__)
 app.secret_key = "dev-secret"  # for flash messages
 
 # Get connection info from environment variables
-CONN_STR = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
-CONTAINER = os.environ.get("AZURE_STORAGE_CONTAINER")
-
+CONN_STR = "DefaultEndpointsProtocol=https;AccountName=storageacclabexp;AccountKey=w+I09GHXJM1MbUAthqD3196bQO2RXGYOTyGfpvffdP8i6nr3xOU/g0aQuCyi7ETxbr0uvBH8kk+U+AStIMVVGA==;EndpointSuffix=core.windows.net"
+CONTAINER = "storageacclabexp"
 if not CONN_STR or not CONTAINER:
     raise RuntimeError("Please set AZURE_STORAGE_CONNECTION_STRING and AZURE_STORAGE_CONTAINER")
 
